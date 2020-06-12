@@ -67,13 +67,54 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
+| Input         		| 32x32x1 Grayscale image   					| 
+| Convolution 5x5     	| 1x1 stride, 'VALID' padding, outputs 28x28x12 |
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+| Max pooling	      	| 2x2 stride,  outputs 14x14x12 				|
+| Convolution 5x5	    | 1x1 stride, 'VALID' padding, outputs 10x10x32 |
+| RELU                  |                                               |
+| Max pooling           | 2x2 stride, output 5x5x32                     |
+| Flattening		    | Output 800    								|
+| Fully connecetd		| Output 120        							|
+| RELU					| 												|
+| Fully connected       | Output 84										|
+| RELU                  |                                               |
+| Dropout               | prob = 0.5 for train; 1.0 for test            |
+| Fully connected       | Output 43 (number of classes)                 |
+
+#### 3. Training the Model.
+
+To train the model, I used a learning rate of 0.0005, batch size pf 128, and 25 epochs. These parameters were determined through multiple runs and evaluation of the learning curve as well as the resulting accuracy. Dropout was added to address signs of overfitting I observed in the training curves. 
+
+As an optimizer, I used the AdamOptimizer as it was based on stochastic gradient descent. As a loss function, I chose cross entropy as implemented with softmax_cross_entropy_with_logits().
+
+The training curves are shown below:
+
+![alt text][image4]
+
+#### 4. Approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. 
+
+My approach was to start with the LeNet-5 architecture and apply that to grayscale and normalized versions of the data. The LeNet architecture was chosen because the street signs seemed comparable to the characters used in the paper. The initial results gave me validation accuracy of approximately 0.91. Based on a need to improve that result and because I saw signs of overfitting in the training curves (validation loss increasing while training loss decreased) I chose to do the following:
+* increase the number of filters (features) in the convolutional layers
+* decrease the learning rate
+* increase the number of epochs
+* add a dropout function following the second fully connected layer
+
+My final model results were:
+* training set accuracy of 0.999
+* validation set accuracy of 0.95 
+* test set accuracy of 0.936
+
+### Test the Model on New Images
+
+#### 1. German traffic signs found on the web.
+
+I found six german street signs on the internet. They are varried in lighting conditions, background, and clutter. In addition, somee have have only symbols while others have text. teh signs are shown below.
+
+![alt text][image5]
+
+Applying the model to these signs provides the following classifications. Shown in the graphs are the top five most probable classifications (as determined through the applicaton of a softmax function). 
+
+![alt text][image6]
+
+The model correctly identified all six signs, but mistook thee 50 km/hr for the 30 km/hr. 
