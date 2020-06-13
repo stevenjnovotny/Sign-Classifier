@@ -130,6 +130,6 @@ The following shows a visualization of the neural network's first two layers. Th
 
 ## Conclusions
 
-I beleive bettere refinement of the model would improve the performance of the classifier. Specifically, increasing the number of nuerons in the hidden layers could have an impact on the fine details (such as text) that the model is currently missing. It also seems  that adjusting the strides in the max pooling could keep more information.
+I believe better refinement of the model would improve the performance of the classifier. Specifically, increasing the number of neurons in the hidden layers could have an impact on the fine details (such as text) that the model is currently missing. It also seems  that adjusting the strides in the max pooling could keep more information.
 
-In addition, I believe the generation of additional data through rotation, scaling and noise addition could craete a more robust model.
+In addition, I believe the generation of additional data through rotation, scaling and noise addition could create a more robust model.
