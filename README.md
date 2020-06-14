@@ -118,7 +118,9 @@ Applying the model to these signs provides the following classifications. Shown 
 
 ![alt text][image6]
 
-The model correctly identified all six signs, but mistook the 50 km/hr for the 30 km/hr. This suggests that the model is focusing on aspects of the signs' morphology as opposed to the details and structure of the text characters. This could also be a result of the granulation and pixilation of the input images. Additionally, the following section identifies the features that cause activation. Perhaps limiting the max pooling would help with the finer details.
+The model correctly identified all six signs, but mistook the 50 km/hr for the 30 km/hr.  This suggests that the model is focusing on aspects of the signs' morphology as opposed to the details and structure of the text characters. This could also be a result of the granulation and pixilation of the input images. Additionally, the following section identifies the features that cause activation. Perhaps limiting the max pooling would help with the finer details. 
+
+The resulting accuracy is thus 83.3%.
 
 ### Visualizing the Neural Network 
 
